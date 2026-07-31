@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Révision+ — Préparation BEPC · Probatoire · Bac</title>
+<meta name="description" content="Révision+ : cours, quiz IA, examens blancs, progression et plan de révision.">
+<meta name="theme-color" content="#071A33">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <div class="offline-badge" id="offlineBadge"><span></span> Hors-ligne</div>
+  <header class="topbar">
+    <button class="brand" id="brandBtn"><img src="icon-192.png" alt="Révision+"><span>Révision<span>+</span></span></button>
+    <div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><button class="avatar" id="profileBtn">J</button></div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="screen active" id="screen-home">
+      <div class="hero">
+        <div><span class="eyebrow">Ton espace de réussite</span><h1>Révise mieux.<br><em>Réussis plus.</em></h1><p>Une plateforme pensée pour préparer les examens avec méthode, IA et entraînement.</p></div>
+        <div class="hero-orbit">🎓</div>
+      </div>
+      <div class="welcome-row"><div><span class="eyebrow">Bonjour 👋</span><h2 id="homeGreeting">Prêt pour ta prochaine révision ?</h2></div><div class="streak">🔥 <strong id="homeStreak">0</strong><small>jours</small></div></div>
+      <div class="stats-strip"><div><strong id="statQuizzes">0</strong><span>Quiz</span></div><div><strong id="statCorrect">0%</strong><span>Réussite</span></div><div><strong id="statXp">0</strong><span>XP</span></div></div>
+
+      <div class="section-head"><div><span class="eyebrow">Mon parcours</span><h2>Continuer à apprendre</h2></div></div>
+      <div class="action-grid">
+        <button class="feature-card" id="goStudy"><span>📚</span><strong>Réviser</strong><small>Cours + quiz par matière</small></button>
+        <button class="feature-card" id="goExam"><span>⏱️</span><strong>Examen blanc</strong><small>Mode chronométré</small></button>
+        <button class="feature-card" id="goAi"><span>🤖</span><strong>Prof IA</strong><small>Pose ta question</small></button>
+        <button class="feature-card" id="goPlan"><span>🗓️</span><strong>Mon planning</strong><small>Objectifs personnalisés</small></button>
+      </div>
+
+      <div class="section-head"><div><span class="eyebrow">Objectif du jour</span><h2 id="dailyTitle">20 minutes aujourd'hui</h2></div><span class="mini-percent" id="dailyPercent">0%</span></div>
+      <div class="daily-card"><div class="daily-top"><span>Progression quotidienne</span><strong id="dailyTime">0 / 20 min</strong></div><div class="progress-track"><div class="progress-fill" id="dailyFill"></div></div><p>Fais au moins un quiz ou une leçon pour avancer vers ton objectif.</p></div>
+
+      <div class="section-head"><div><span class="eyebrow">Ton niveau</span><h2>Choisis ton examen</h2></div></div>
+      <div class="exam-grid" id="niveauGrid"></div>
+    </section>
+
+    <!-- STUDY -->
+    <section class="screen" id="screen-matieres">
+      <div class="page-head"><button class="round-back" data-back="screen-home">←</button><div><span class="eyebrow" id="matieresNiveauLabel">Niveau</span><h1>Réviser</h1></div></div>
+      <div class="subject-hero"><div class="subject-emoji">📚</div><div><strong id="subjectCount">0 matières</strong><span>Apprends une notion, puis entraîne-toi.</span></div></div>
+      <div class="matiere-grid" id="matiereGrid"></div>
+    </section>
+
+    <!-- LESSON -->
+    <section class="screen" id="screen-lesson">
+      <div class="page-head"><button class="round-back" data-back="screen-matieres">←</button><div><span class="eyebrow" id="lessonSubject">Matière</span><h1 id="lessonTitle">Cours</h1></div></div>
+      <article class="lesson-card"><div class="lesson-banner">🧠 <span>Fiche express</span></div><h2 id="lessonHeading">Comprendre l'essentiel</h2><div id="lessonBody" class="lesson-body"></div><div class="lesson-tips"><strong>💡 À retenir</strong><p id="lessonTip"></p></div></article>
+      <button class="primary-btn" id="lessonQuizBtn">Me tester sur cette notion <b>→</b></button>
+    </section>
+
+    <!-- QUIZ SETUP -->
+    <section class="screen" id="screen-chapitre">
+      <div class="page-head"><button class="round-back" data-back="screen-matieres">←</button><div><span class="eyebrow" id="chapitreMatiereLabel">Matière</span><h1>Prépare ton quiz</h1></div></div>
+      <div class="setup-card"><label>CHAPITRE OU THÈME</label><input type="text" id="chapitreInput" placeholder="Ex. Les fonctions, la colonisation…"><div class="suggestions" id="chapitreSuggestions"></div></div>
+      <div class="settings-card"><div><span>Nombre de questions</span><div class="choice-row" id="questionChoices"><button data-n="10">10</button><button class="selected" data-n="20">20</button><button data-n="30">30</button></div></div><div><span>Difficulté</span><div class="choice-row" id="difficultyChoices"><button class="selected" data-d="mixte">Mixte</button><button data-d="facile">Facile</button><button data-d="difficile">Difficile</button></div></div></div>
+      <button class="primary-btn" id="startQuizBtn" disabled><span>Générer mon quiz</span><b>→</b></button>
+    </section>
+
+    <!-- EXAM -->
+    <section class="screen" id="screen-exam">
+      <div class="page-head"><button class="round-back" data-back="screen-home">←</button><div><span class="eyebrow">Conditions réelles</span><h1>Examen blanc</h1></div></div>
+      <div class="exam-intro"><span>🎓</span><div><strong>Teste-toi sans aide</strong><p>Chronomètre, questions mélangées et résultat final.</p></div></div>
+      <div class="setup-card"><label>ÉPREUVE</label><div class="choice-row exam-levels"><button class="selected" data-exam="bepc">BEPC</button><button data-exam="probatoire">Probatoire</button><button data-exam="bac">Bac</button></div></div>
+      <div class="exam-rules"><div>⏱️ <strong>30 min</strong><span>temps limité</span></div><div>📝 <strong>20</strong><span>questions</span></div><div>🚫 <strong>Sans aide</strong><span>mode examen</span></div></div>
+      <button class="primary-btn" id="startExamBtn">Commencer l'épreuve <b>→</b></button>
+    </section>
+
+    <!-- AI -->
+    <section class="screen" id="screen-ai">
+      <div class="page-head"><button class="round-back" data-back="screen-home">←</button><div><span class="eyebrow">Assistant personnel</span><h1>Prof IA</h1></div></div>
+      <div class="ai-hero"><span>🤖</span><div><strong>Ton professeur est disponible.</strong><p>Demande une explication, une méthode ou un exercice.</p></div></div>
+      <div class="chat" id="chatMessages"><div class="chat-msg ai"><strong>Prof IA</strong><p>Bonjour ! 👋 Quelle notion veux-tu comprendre aujourd'hui ?</p></div></div>
+      <div class="prompt-chips"><button>Explique-moi simplement</button><button>Donne-moi un exercice</button><button>Pourquoi cette réponse ?</button></div>
+      <form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Pose ta question…"><button>➤</button></form>
+    </section>
+
+    <!-- PLAN -->
+    <section class="screen" id="screen-plan">
+      <div class="page-head"><button class="round-back" data-back="screen-home">←</button><div><span class="eyebrow">Organisation</span><h1>Mon planning</h1></div></div>
+      <div class="plan-card"><div><span class="eyebrow">Objectif</span><h2>Construire une routine</h2><p>Choisis ton temps quotidien et ton examen pour recevoir un parcours simple.</p></div><div class="plan-controls"><label>Temps / jour<select id="studyMinutes"><option value="20">20 min</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">1 h</option></select></label><label>Examen<select id="planExam"><option value="bepc">BEPC</option><option value="probatoire">Probatoire</option><option value="bac">Baccalauréat</option></select></label></div><button class="primary-btn" id="generatePlanBtn">Créer mon planning <b>→</b></button></div>
+      <div class="section-head"><div><span class="eyebrow">Cette semaine</span><h2>Ton parcours</h2></div></div>
+      <div class="week-list" id="weekList"></div>
+    </section>
+
+    <!-- LOADING -->
+    <section class="screen" id="screen-loading"><div class="loading-state"><img class="loader-logo-img" src="icon-192.png" alt=""><div class="loading-ring"></div><h2>Ton professeur IA prépare<br>le contenu…</h2><p>Création adaptée à ton niveau.</p></div></section>
+
+    <!-- QUIZ -->
+    <section class="screen" id="screen-quiz">
+      <div class="quiz-top"><button class="round-back" data-back="screen-home">✕</button><div class="quiz-meta"><span id="quizMatiereLabel">Matière</span><strong id="quizChapitreLabel">Chapitre</strong></div><div class="score-pill">⭐ <span id="liveScore">0</span></div></div>
+      <div class="quiz-progress-row"><span id="quizProgress">Question 1 / 20</span><span id="quizPercent">0%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="question-card"><div class="question-number" id="questionNumber">01</div><div class="question-text" id="questionText"></div></div>
+      <div class="options-list" id="optionsList"></div><div class="reaction-banner" id="reactionBanner"></div>
+      <div class="explanation-card" id="explanationCard"><div class="explain-icon">💡</div><div><strong>À retenir</strong><p id="explanationText"></p></div></div>
+      <button class="primary-btn next-btn" id="nextQuestionBtn" style="display:none;">Question suivante <b>→</b></button>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="screen" id="screen-results"><div class="results-panel"><div class="result-badge" id="resultBadge">🏆</div><span class="eyebrow">Épreuve terminée</span><h1 id="resultsMessage">Excellent travail !</h1><p id="resultsChapitre">Matière · Chapitre</p><div class="score-ring"><div><strong id="resultsScore">0/20</strong><span id="resultsPercent">0%</span></div></div><div class="result-grid"><div><strong id="resultCorrect">0</strong><span>Bonnes réponses</span></div><div><strong id="resultWrong">0</strong><span>À revoir</span></div><div><strong id="resultXp">+0 XP</strong><span>Récompense</span></div></div><div class="results-actions"><button class="primary-btn" id="retryBtn">↻ Refaire</button><button class="secondary-btn" id="newChapitreBtn">Changer de chapitre</button><button class="secondary-btn" id="homeBtn">Retour à l’accueil</button></div></div></section>
+
+    <!-- AUTH -->
+    <section class="screen" id="screen-auth">
+      <div class="page-head"><button class="round-back" data-back="screen-profile">←</button><div><span class="eyebrow">Ta progression, partout</span><h1>Mon compte</h1></div></div>
+      <div class="ai-hero"><span>🔐</span><div><strong>Sauvegarde ta progression en ligne</strong><p>Connecte-toi pour retrouver ton XP, tes quiz et ton profil sur n'importe quel appareil.</p></div></div>
+      <div class="choice-row" id="authTabs"><button class="selected" data-tab="login">Se connecter</button><button data-tab="register">Créer un compte</button></div>
+      <div class="setup-card" id="authNameField" style="display:none;"><label>PRÉNOM</label><input type="text" id="authName" placeholder="Ton prénom"></div>
+      <div class="setup-card"><label>EMAIL</label><input type="email" id="authEmail" placeholder="toi@exemple.com"></div>
+      <div class="setup-card"><label>MOT DE PASSE</label><input type="password" id="authPassword" placeholder="6 caractères minimum"></div>
+      <p class="auth-error" id="authError"></p>
+      <button class="primary-btn" id="authSubmitBtn"><span>Se connecter</span><b>→</b></button>
+      <button class="secondary-btn" id="authSkipBtn" style="margin-top:10px;">Continuer sans compte</button>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="screen" id="screen-profile"><div class="page-head"><button class="round-back" data-back="screen-home">←</button><div><span class="eyebrow">Mon espace</span><h1>Profil & progression</h1></div></div>
+      <div class="profile-card"><div class="big-avatar">J</div><div><h2 id="profileName">Mon profil</h2><p>Chaque session te rapproche de ton objectif.</p></div><button id="editNameBtn">✎</button></div>
+      <div class="profile-stat-grid"><div><strong id="profileQuizzes">0</strong><span>Quiz terminés</span></div><div><strong id="profileAccuracy">0%</strong><span>Réussite</span></div><div><strong id="profileXp">0</strong><span>XP gagnés</span></div><div><strong id="profileStreak">0</strong><span>Jours consécutifs</span></div></div>
+      <div class="achievement-card"><span>🏅</span><div><strong id="achievementTitle">Premier pas</strong><p id="achievementText">Termine ton premier quiz pour débloquer ton badge.</p></div></div>
+      <div class="achievement-card"><span id="accountIcon">👤</span><div><strong id="accountStatus">Non connecté</strong><p id="accountSub">Connecte-toi pour synchroniser ta progression.</p></div></div>
+      <button class="secondary-btn" id="accountBtn">Se connecter</button>
+      <button class="secondary-btn danger-btn" id="resetBtn">Réinitialiser mes statistiques</button>
+    </section>
+  </main>
+
+  <nav class="bottom-nav"><button class="nav-item active" data-nav="screen-home"><span>⌂</span>Accueil</button><button class="nav-item" id="navRevision"><span>📚</span>Réviser</button><button class="nav-item" id="navQuick"><span>⚡</span>Quiz</button><button class="nav-item" data-nav="screen-profile"><span>◉</span>Profil</button></nav>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
